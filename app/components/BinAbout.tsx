@@ -20,8 +20,9 @@ export default function BinAbout() {
           <li>Country of issuance (including country flag)</li>
         </ul>
         <p>
-          Whether you're a merchant verifying transactions, a developer integrating payment systems, or simply curious
-          about your card details, our BIN Checker provides accurate and up-to-date information to meet your needs.
+          Whether you&apos;re a merchant verifying transactions, a developer integrating payment systems, or simply
+          curious about your card details, our BIN Checker provides accurate and up-to-date information to meet your
+          needs.
         </p>
       </CardContent>
     </Card>
