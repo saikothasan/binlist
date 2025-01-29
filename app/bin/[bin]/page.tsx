@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
-import BinDataDisplay from "@/components/BinDataDisplay"
+import BinDataDisplay from "../components/BinDataDisplay"
 
 export const metadata: Metadata = {
   title: "BIN Details",
