@@ -1,37 +1,23 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Loader2 } from "lucide-react"
-import BinDataDisplay from "./BinDataDisplay"
-
-type BinData = {
-  BIN: string
-  Brand: string
-  Type: string
-  Category: string
-  Issuer: string
-  IssuerPhone: string
-  IssuerUrl: string
-  isoCode2: string
-  isoCode3: string
-  CountryName: string
-}
 
 export default function BinChecker() {
   const [bin, setBin] = useState("")
-  const [binData, setBinData] = useState<BinData | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
+  const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
     setError(null)
-    setBinData(null)
 
     try {
       const response = await fetch(`/api/check-bin?bin=${bin}`)
@@ -41,7 +27,8 @@ export default function BinChecker() {
         throw new Error(data.error || "An error occurred")
       }
 
-      setBinData(data)
+      // Redirect to the BIN details page
+      router.push(`/bin/${bin}`)
     } catch (err) {
       setError(err instanceof Error ? err.message : "An error occurred")
     } finally {
@@ -51,7 +38,6 @@ export default function BinChecker() {
 
   const handleClear = () => {
     setBin("")
-    setBinData(null)
     setError(null)
   }
 
@@ -88,8 +74,6 @@ export default function BinChecker() {
             <AlertDescription>{error}</AlertDescription>
           </Alert>
         )}
-
-        {binData && <BinDataDisplay data={binData} />}
       </CardContent>
     </Card>
   )
